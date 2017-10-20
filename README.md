@@ -4,7 +4,7 @@ An app for Seq (http://getseq.net) that forwards messages to Discord through web
 
 ## Changes
 
-### 0.1.0
+### 0.1.1
 
 - initial revision
 
