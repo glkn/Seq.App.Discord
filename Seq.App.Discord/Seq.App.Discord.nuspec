@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Seq.App.Discord</id>
+    <version>$version$</version>
+    <authors>Alexey Galkin</authors>
+    <owners>Alexey Galkin</owners>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/glkn/Seq.App.Discord</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An app for Seq (http://getseq.net) that forwards messages to HipChat.</description>
+    <releaseNotes>See https://github.com/glkn/Seq.App.Discord for changes.</releaseNotes>
+    <copyright>Copyright Alexey Galkin 2017</copyright>
+    <tags>seq-app seq serilog event discord</tags>
+    <dependencies>
+      <dependency id="Seq.Apps" version="3.4.17" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\Newtonsoft.Json.dll" target="lib\net45" />
+    <file src="bin\Release\System.Net.Http.Formatting.dll" target="lib\net45" />
+  </files>
+</package>
