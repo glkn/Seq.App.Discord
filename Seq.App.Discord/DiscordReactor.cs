@@ -58,6 +58,7 @@ namespace Seq.App.Discord
         {
             using (var client = new HttpClient())
             {
+                client.Timeout = new TimeSpan(0, 0, 10);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 var prms = new WebhookParams
@@ -84,7 +85,7 @@ namespace Seq.App.Discord
                 {
                     Log
                         .ForContext("Uri", response.RequestMessage.RequestUri)
-                        .Error("Could not send Discord message, server replied {StatusCode} {StatusMessage}: {Message}", Convert.ToInt32(response.StatusCode), response.StatusCode, await response.Content.ReadAsStringAsync());
+                        .Error("Could not send Discord message {@prms}, server replied {StatusCode} {StatusMessage}: {Message}", prms, Convert.ToInt32(response.StatusCode), response.StatusCode, await response.Content.ReadAsStringAsync());
                 }
             }
         }

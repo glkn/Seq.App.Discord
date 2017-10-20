@@ -4,6 +4,14 @@ An app for Seq (http://getseq.net) that forwards messages to Discord through web
 
 ## Changes
 
+### 0.2.2
+
+- Enhanced logging of http errors
+
+### 0.2.1
+
+- Enhanced logging of http errors
+
 ### 0.2.0
 
 - Correct attributes added to DiscordReactor class
@@ -21,7 +29,7 @@ An app for Seq (http://getseq.net) that forwards messages to Discord through web
 From solution root, run:
 
 - msbuild
-- nuget pack ./Seq.App.Discord/Seq.App.Discord.nuspec
+- nuget pack ./Seq.App.Discord/Seq.App.Discord.csproj
 
 ## Credits
 
