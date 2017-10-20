@@ -4,6 +4,14 @@ An app for Seq (http://getseq.net) that forwards messages to Discord through web
 
 ## Changes
 
+### 0.2.0
+
+- Correct attributes added to DiscordReactor class
+
+### 0.1.2
+
+- initial revision
+
 ### 0.1.1
 
 - initial revision

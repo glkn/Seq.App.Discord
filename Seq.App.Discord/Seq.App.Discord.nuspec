@@ -8,7 +8,7 @@
     <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
     <projectUrl>https://github.com/glkn/Seq.App.Discord</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>An app for Seq (http://getseq.net) that forwards messages to HipChat.</description>
+    <description>An app for Seq (http://getseq.net) that forwards messages to Discord.</description>
     <releaseNotes>See https://github.com/glkn/Seq.App.Discord for changes.</releaseNotes>
     <copyright>Copyright Alexey Galkin 2017</copyright>
     <tags>seq-app seq serilog event discord</tags>

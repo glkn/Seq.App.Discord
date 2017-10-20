@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace Seq.App.Discord
 {
+    [SeqApp("Discord",
+    Description = "Sends log events to Discord.")]
     public class DiscordReactor : Reactor, ISubscribeTo<LogEventData>
     {
         static DiscordReactor()
