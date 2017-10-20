@@ -6,7 +6,7 @@ An app for Seq (http://getseq.net) that forwards messages to Discord through web
 
 ### 0.2.2
 
-- Enhanced logging of http errors
+- Timeout of http requests increased
 
 ### 0.2.1
 
