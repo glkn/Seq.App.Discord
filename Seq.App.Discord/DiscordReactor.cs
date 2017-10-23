@@ -2,6 +2,7 @@
 using Seq.Apps;
 using Seq.Apps.LogEvents;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
@@ -13,6 +14,16 @@ namespace Seq.App.Discord
     Description = "Sends log events to Discord.")]
     public class DiscordReactor : Reactor, ISubscribeTo<LogEventData>
     {
+        private static IDictionary<LogEventLevel, int> _levelColorMap = new Dictionary<LogEventLevel, int>
+        {
+            {LogEventLevel.Verbose, 8421504},
+            {LogEventLevel.Debug, 8421504},
+            {LogEventLevel.Information, 32768},
+            {LogEventLevel.Warning, 16776960},
+            {LogEventLevel.Error, 16711680},
+            {LogEventLevel.Fatal, 16711680},
+        };
+
         static DiscordReactor()
         {
 
@@ -31,14 +42,27 @@ namespace Seq.App.Discord
         public string DiscordWebhookUrl { get; set; }
 
         [SeqAppSetting(
-        HelpText = "Background color for message. One of \"yellow\", \"red\", \"green\", \"purple\", \"gray\", or \"random\". (default: auto based on message level)",
+        DisplayName = "Title property name",
+        HelpText = "Name of an event property to be used in title of a message",
         IsOptional = true)]
-        public string Color { get; set; }
+        public string TitlePropertyName { get; set; }
 
         [SeqAppSetting(
+        DisplayName = "Bot name",
+        HelpText = "Notifier bot name (default: Seq notifier)",
+        IsOptional = true)]
+        public string NotifierBotName { get; set; }
+
+        [SeqAppSetting(
+        DisplayName = "Discord Avatar URL",
+        HelpText = "Url to any image that fits Discrod avatar requirements",
+        IsOptional = true)]
+        public string AvatarUrl { get; set; }
+
+        /*[SeqAppSetting(
         HelpText = "Whether or not messages should trigger notifications for people in the room (change the tab color, play a sound, etc). Each recipient's notification preferences are taken into account.",
         IsOptional = true)]
-        public bool Notify { get; set; }
+        public bool Notify { get; set; }*/
 
         public void On(Event<LogEventData> evt)
         {
@@ -61,18 +85,25 @@ namespace Seq.App.Discord
                 client.Timeout = new TimeSpan(0, 0, 10);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var title = evt.Data.Level.ToString();
+                if ( !string.IsNullOrWhiteSpace(TitlePropertyName) && evt.Data.Properties.ContainsKey(TitlePropertyName)  )
+                {
+                    title = evt.Data.Properties[TitlePropertyName].ToString() + " - " + title;
+                }
+
                 var prms = new WebhookParams
                 {
-                    UserName = "Seq notifier",
-                    AvatarUrl = "http://www.freestencilgallery.com/wp-content/uploads/2016/06/Overwatch-Bastion-Stencil-thumb.jpg",
+                    UserName = string.IsNullOrWhiteSpace(NotifierBotName) ? "Seq notifier" : NotifierBotName,
+                    AvatarUrl = AvatarUrl,
                     Embeds = new WebhookParamsEmbeds[]
                         {
                             new WebhookParamsEmbeds()
                             {
-                                Title = evt.Data.Level.ToString(),
+                                Title = title,
                                 Url = string.Format("{0}/#/events?filter=@Id%20%3D%3D%20%22{1}%22&show=expanded\">", BaseUrl, evt.Id ),
                                 Description = evt.Data.RenderedMessage,
-                                Color = 50372
+                                Color = _levelColorMap[evt.Data.Level]
                             }
                         }
                 };

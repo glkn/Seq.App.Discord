@@ -4,6 +4,12 @@ An app for Seq (http://getseq.net) that forwards messages to Discord through web
 
 ## Changes
 
+### 0.3.0
+
+- Color of a message now depends on a message level
+- Notifier bot name and avatar are now configurable
+- Title of a message now can contain one property value in addition to event level
+
 ### 0.2.2
 
 - Timeout of http requests increased
