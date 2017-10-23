@@ -48,6 +48,12 @@ namespace Seq.App.Discord
         public string TitlePropertyName { get; set; }
 
         [SeqAppSetting(
+        DisplayName = "Message color",
+        HelpText = "Color for message. Integer value as per Discord requirements",
+        IsOptional = true)]
+        public int? Color { get; set; }
+
+        [SeqAppSetting(
         DisplayName = "Bot name",
         HelpText = "Notifier bot name (default: Seq notifier)",
         IsOptional = true)]
@@ -103,7 +109,7 @@ namespace Seq.App.Discord
                                 Title = title,
                                 Url = string.Format("{0}/#/events?filter=@Id%20%3D%3D%20%22{1}%22&show=expanded\">", BaseUrl, evt.Id ),
                                 Description = evt.Data.RenderedMessage,
-                                Color = _levelColorMap[evt.Data.Level]
+                                Color = Color.HasValue ? Color.Value : _levelColorMap[evt.Data.Level]
                             }
                         }
                 };

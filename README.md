@@ -4,6 +4,10 @@ An app for Seq (http://getseq.net) that forwards messages to Discord through web
 
 ## Changes
 
+### 0.4.0
+
+- Static color configuration option added
+
 ### 0.3.0
 
 - Color of a message now depends on a message level
@@ -24,11 +28,11 @@ An app for Seq (http://getseq.net) that forwards messages to Discord through web
 
 ### 0.1.2
 
-- cosmetic version bump
+- Cosmetic version bump
 
 ### 0.1.1
 
-- initial revision
+- Initial revision
 
 ## Building NuGet Package
 
